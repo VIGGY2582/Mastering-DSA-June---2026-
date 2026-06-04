@@ -1,0 +1,33 @@
+// 3751. Total Waviness of Numbers in Range I
+
+class Solution {
+    public int totalWaviness(int num1, int num2) {
+        int count = 0;
+        for(int i = num1 ; i <= num2 ; i++ ){
+            String n = Integer.toString(i);
+            if(n.length()<3){
+                continue;
+            }
+            count += ans(n);
+
+        }
+        return count;
+    }
+
+    int ans(String n){
+        int c =0;
+        for(int i =0; i < n.length()-2 ;i++){
+            char n1 = n.charAt(i);
+            char n2 = n.charAt(i+1);
+            char n3 = n.charAt(i+2);
+            if(n1<n2 && n3<n2){
+                c++;
+            }
+            if(n1>n2 && n3>n2){
+                c++;
+            }
+        }
+        return c;
+    }
+
+}
