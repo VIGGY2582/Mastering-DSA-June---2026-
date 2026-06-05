@@ -1,0 +1,25 @@
+// 875. Koko Eating Bananas
+
+
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int left =1;
+        int ryt = 0;
+        for(int pile : piles){
+            ryt= Math.max(ryt,pile);
+        }
+        while(left<ryt){
+            int mid = left +(ryt-left)/2;
+            long hrs = 0;
+            for(int pile:piles){
+                hrs+=(pile+mid-1)/mid;
+            }
+            if(hrs<=h){
+                ryt = mid;
+            }else{
+                left = mid+1;
+            }
+        }
+        return left;
+    }
+}
