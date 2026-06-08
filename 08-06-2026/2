@@ -1,0 +1,38 @@
+// 380. Insert Delete GetRandom O(1)
+
+class RandomizedSet {
+    Map<Integer, Integer> mp;  // val → index in nums
+    List<Integer> nums;
+    Random rand;
+
+    public RandomizedSet() {
+        mp   = new HashMap<>();
+        nums = new ArrayList<>();
+        rand = new Random();
+    }
+
+    public boolean insert(int val) {
+        if (mp.containsKey(val)) return false;
+        nums.add(val);
+        mp.put(val, nums.size() - 1);
+        return true;
+    }
+
+    public boolean remove(int val) {
+        if (!mp.containsKey(val)) return false;
+
+        int idx  = mp.get(val);
+        int last = nums.get(nums.size() - 1);
+
+        nums.set(idx, last);   // overwrite gap with last element
+        mp.put(last, idx);     // update last element's index
+        mp.remove(val);        // remove val from map
+        nums.remove(nums.size() - 1);  // shrink list
+
+        return true;
+    }
+
+    public int getRandom() {
+        return nums.get(rand.nextInt(nums.size()));
+    }
+}
