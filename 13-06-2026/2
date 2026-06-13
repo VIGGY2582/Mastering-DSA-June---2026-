@@ -1,0 +1,26 @@
+// 3838. Weighted Word Mapping
+
+class Solution {
+    public String mapWordWeights(String[] words, int[] weights) {
+        int n = words.length;
+        StringBuilder s = new StringBuilder();
+        for(int i =0;i<n;i++){
+            char a = find(words[i],weights);
+            s.append(a);
+        }
+        return s.toString();
+    }
+
+    static char find(String str , int[] w){
+        int tw= 0;
+        for(int i = 0;i<str.length();i++){
+            char c = str.charAt(i);
+            tw+=w[c-'a'];
+        }
+        int m = tw % 26;
+        int a = 'z'-m;
+        char ch =(char) a ;
+        return ch;
+    }
+
+}
