@@ -1,0 +1,46 @@
+// 3961. Maximize Sum of Device Ratings
+
+class Solution {
+    public long maxRatings(int[][] units) {
+        int m = units.length;
+
+        long sumSecond = 0;
+        int globalMin = Integer.MAX_VALUE;
+
+        int[] second = new int[m];
+
+        for (int i = 0; i < m; i++) {
+            int first = Integer.MAX_VALUE;
+            int sec = Integer.MAX_VALUE;
+
+            // Find smallest and second smallest in the current device
+            for (int x : units[i]) {
+                if (x < first) {
+                    sec = first;
+                    first = x;
+                } else if (x < sec) {
+                    sec = x;
+                }
+            }
+
+            globalMin = Math.min(globalMin, first);
+
+            // If the device has only one unit, don't remove from it.
+            if (sec == Integer.MAX_VALUE) {
+                sec = first;
+            }
+
+            second[i] = sec;
+            sumSecond += sec;
+        }
+
+        long ans = 0;
+
+        // Try each device as the "receiver" (sacrificial device)
+        for (int i = 0; i < m; i++) {
+            ans = Math.max(ans, sumSecond - second[i] + globalMin);
+        }
+
+        return ans;
+    }
+}
