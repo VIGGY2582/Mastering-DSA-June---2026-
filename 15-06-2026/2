@@ -1,0 +1,59 @@
+// 3960. Frequency Balance Subarray
+
+import java.util.*;
+
+class Solution {
+    public int getLength(int[] nums) {
+        int n = nums.length;
+        int ans = 1;
+
+        for (int left = 0; left < n; left++) {
+
+            HashMap<Integer, Integer> freq = new HashMap<>();
+            HashMap<Integer, Integer> freqCount = new HashMap<>();
+
+            for (int right = left; right < n; right++) {
+
+                int num = nums[right];
+                int oldFreq = freq.getOrDefault(num, 0);
+
+                // Remove old frequency
+                if (oldFreq > 0) {
+                    int cnt = freqCount.get(oldFreq);
+                    if (cnt == 1)
+                        freqCount.remove(oldFreq);
+                    else
+                        freqCount.put(oldFreq, cnt - 1);
+                }
+
+                // Add new frequency
+                int newFreq = oldFreq + 1;
+                freq.put(num, newFreq);
+                freqCount.put(newFreq, freqCount.getOrDefault(newFreq, 0) + 1);
+
+                int distinct = freq.size();
+
+                // Case 1: Only one distinct element
+                if (distinct == 1) {
+                    ans = Math.max(ans, right - left + 1);
+                }
+                // Case 2: Two frequencies f and 2f
+                else if (freqCount.size() == 2) {
+
+                    Iterator<Integer> it = freqCount.keySet().iterator();
+                    int f1 = it.next();
+                    int f2 = it.next();
+
+                    int small = Math.min(f1, f2);
+                    int large = Math.max(f1, f2);
+
+                    if (large == 2 * small) {
+                        ans = Math.max(ans, right - left + 1);
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+}
