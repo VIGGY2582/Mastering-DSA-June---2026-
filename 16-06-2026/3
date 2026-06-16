@@ -1,0 +1,20 @@
+// 167. Two Sum II - Input Array Is Sorted
+
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int si =0;
+        int li =numbers.length-1;
+        while(si<li){
+            int sum = numbers[si]+numbers[li];
+            if(sum == target){
+                return new int[] {si+1,li+1};
+            }
+            if(sum>target){
+                li--;
+            }else{
+                si++;
+            }
+        }
+        return new int[] {-1,-1};
+    }
+}
