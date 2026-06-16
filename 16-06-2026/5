@@ -1,0 +1,20 @@
+// 209. Minimum Size Subarray Sum
+
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int sum = 0;
+        int size = Integer.MAX_VALUE;
+        int li = 0;
+        int si = 0;
+        while(li<nums.length){
+            sum += nums[li];
+            while(sum >= target){
+                size = Math.min(size,li-si+1);
+                sum-=nums[si];
+                si++;
+            }
+            li++;
+        }
+        return size == Integer.MAX_VALUE ? 0 : size;
+    }
+}
