@@ -1,0 +1,20 @@
+// Mystical Numbers in Spookyville
+
+// You are using Java
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if(n<0){
+            System.out.print("Wrong Input");
+        }else{
+            int f = (int) Math.pow(n,n);
+            if(f%10 == n){
+                System.out.print("TRUE");
+            }else{
+                System.out.print("FALSE");
+            }
+        }
+    }
+}
