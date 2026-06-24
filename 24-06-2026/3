@@ -1,0 +1,49 @@
+// YoursPay
+
+// You are using Java
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int original = n;
+
+        int temp = n;
+        int digits = 0;
+        while (temp > 0) {
+            digits++;
+            temp /= 10;
+        }
+        temp = n;
+        int armstrongSum = 0;
+
+        while (temp > 0) {
+            int digit = temp % 10;
+            armstrongSum += (int) Math.pow(digit, digits);
+            temp /= 10;
+        }
+
+        temp = n;
+        int answer = 0;
+
+        if (armstrongSum == original) {
+            while (temp > 0) {
+                int digit = temp % 10;
+                if (digit % 2 == 0)
+                    answer += digit;
+                temp /= 10;
+            }
+        } else {
+            while (temp > 0) {
+                int digit = temp % 10;
+                if (digit % 2 != 0)
+                    answer += digit;
+                temp /= 10;
+            }
+        }
+
+        System.out.println(answer);
+    }
+}
