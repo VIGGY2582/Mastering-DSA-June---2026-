@@ -1,0 +1,17 @@
+// 3974. Maximum Total Sum of K Selected Elements
+
+class Solution {
+    public long maxSum(int[] nums, int k, int mul) {
+        Arrays.sort(nums);
+        long ts = 0 ;
+        for(int i = nums.length-1;i>=nums.length-k;i--){
+            if(mul==0){
+                ts+=nums[i];
+            }else{
+            ts +=1L*nums[i]*mul;
+            mul--;
+            }
+        }
+        return  ts;
+    }
+}
