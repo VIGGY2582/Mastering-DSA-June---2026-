@@ -1,0 +1,19 @@
+// 2063. Vowels of All Substrings
+
+class Solution {
+    public long countVowels(String word) {
+        int n = word.length();
+        long count = 0;
+
+        for(int pos = 0 ; pos < n ; pos++){
+            if(isVowel(word.charAt(pos))){
+                count += (long)(n - pos) * (long)(pos + 1);
+            }
+        }
+        return count;
+    }
+
+    boolean isVowel(char ch){
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+    }
+}
